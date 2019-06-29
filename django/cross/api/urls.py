@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^users/$', views.UserView.as_view()),
     url(r'^faces/$', views.FacesView.as_view()),
+    url(r'^faces/(?P<visitorname>.*)/$', views.VFaceView.as_view()),
     url(r'^visitors/$', views.VisitorsView.as_view()),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

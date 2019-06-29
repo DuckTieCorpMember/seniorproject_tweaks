@@ -2,31 +2,10 @@
   <v-app>
     <v-container>
       <v-layout row>
-        <v-flex shrink pa-1>
-          <v-card dark color="green darken-3">
-            <v-list two-line subheader>
-              <v-list-tile
-                v-for="item in items"
-                :key="item.title"
-                avatar
-                v-on:="">
-
-                <v-list-tile-avatar>
-                  <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
-                </v-list-tile-avatar>
-
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                  <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-                </v-list-tile-content>
-
-              </v-list-tile>
-              </v-list>
-          </v-card>
-        </v-flex>
+        <list-view :items="items" />
         <v-flex grow pa-1>
           <v-card dark color="green">
-            <v-card-text>Banana</v-card-text>
+            <v-card-text>Banana</v-card-text> 
           </v-card>
         </v-flex>
       </v-layout>
@@ -35,10 +14,13 @@
 </template>
 
 <script>
+import ListView from './views/ListView.vue';
+import axios from 'axios';
+
 export default {
   name: 'App',
   components: {
-
+    ListView,
   },
   data () {
     return {
@@ -47,14 +29,28 @@ export default {
           { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Recipes'},
           { icon: 'folder', iconClass: 'grey lighten-1 white--text', title: 'Work'}
         ],
-        dirs: [],
     }
+  },
+  mounted: function (){
+    this.getVisitors();
   },
   computed: {
 
   },
   methods: {
-
+    async getVisitors(){
+      axios.get('http://127.0.0.1:8000/visitors/').then(res => {
+        const items = res.data;
+        this.items=[];
+        items.forEach(element => {
+          this.items.push({
+            icon: 'folder',
+            iconClass: 'grey lighten-1 white--text',
+            title: element.visitorName,
+          });
+        });
+      })
+    }
   },
 }
 </script>
