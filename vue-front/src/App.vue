@@ -31,25 +31,23 @@ export default {
         ],
     }
   },
-  mounted: function (){
+  mounted: function () {
     this.getVisitors();
-  },
-  computed: {
 
+    setInterval(function () {
+      this.getVisitors();
+    }.bind(this), 1000); 
   },
   methods: {
     async getVisitors(){
-      axios.get('http://127.0.0.1:8000/visitors/').then(res => {
-        const items = res.data;
-        this.items=[];
-        items.forEach(element => {
-          this.items.push({
-            icon: 'folder',
-            iconClass: 'grey lighten-1 white--text',
-            title: element.visitorName,
-          });
-        });
+      // eslint-disable-next-line
+      console.log("A!")
+      const responce = await axios.get({
+        url: 'http://127.0.0.1:8000/visitors/',
+        method: 'get'
       })
+      // eslint-disable-next-line
+      console.log(responce)
     }
   },
 }

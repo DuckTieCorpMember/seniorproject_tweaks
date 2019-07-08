@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'localhost:8080']
 
-CORS_ORIGIN_ALLOW_ALL = True 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,6 +55,26 @@ MIDDLEWARE_CLASSES = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1",
+    "http://localhost"
+]
+CORS_ORIGIN_REGEX_WHITELIST = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1",
+    "http://localhost"
+] 
 
 ROOT_URLCONF = 'api.urls'
 
